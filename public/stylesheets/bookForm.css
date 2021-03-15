@@ -1,0 +1,46 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    }
+    body {
+    background: #f4f1de;
+    }
+    .bookFormContainer {
+        background: #b7b7a4;
+        position: absolute;
+        top:25%;
+        left: 25%;
+        padding: 20px;
+        width: 550px;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+    }
+    form {
+        display: flex;
+        flex-direction:column;
+        justify-content: center;
+        
+    }
+    form input{
+        width: 92%;
+    border: none;
+    height: 20px;
+    margin: 10px;
+    }
+    form button{
+        color: black;
+    border: none;
+    cursor: pointer;
+    background: white;
+    height: 20px;
+    margin: 10px;
+    
+    }
+    h1{
+        font-family: neue-kabel,sans-serif;
+        font-weight: 800;
+        font-style: normal;
+    }
