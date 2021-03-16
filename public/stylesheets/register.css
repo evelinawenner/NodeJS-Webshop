@@ -1,0 +1,97 @@
+@media only screen and (min-width: 1080px) {
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .header{
+        background-color: #e4e4e4;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        padding-bottom: 3%;
+    }
+    .icon{
+        grid-area: 1/8/1/8;
+        width: 120px;
+        height: 30px;
+        background-color: #e98326;
+        padding: 3px 3px 5px 3px;
+    }
+    .icon a{
+        padding: 3px;
+        color: white;
+        margin: 0 2% 0 2%;
+        justify-content: space-around;
+    }
+    
+    .grid-item1{
+        grid-area: 2/3/2/3;
+        font-family: 'Akaya Telivigala';
+    }
+    .grid-item2{
+        grid-area: 2/7/2/7;
+        font-size: 1rem;
+    }
+    nav{
+        height: 30px;
+    }
+    nav li{
+        float: left;
+        list-style: none;
+    }
+    nav li a{
+        color: black;
+        text-decoration: none;
+        width: 50px;
+        padding: 5px;
+        margin-right: 10px;
+        margin-left: 10px;
+        font-size: 0.8rem;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    nav li a:hover{
+        background-color: #e98326;
+        color: white;
+    }
+
+    .main{
+        width: 500px;
+        padding-top: 5%;
+        margin-left: auto;
+        margin-right: auto; 
+    }
+    .main form{
+        width: 100%;
+    }
+    .main h3{
+        text-align: center;
+    }
+    .main form input{
+        width: 100%;
+        margin-bottom: 10px;
+    }
+    .main form button{
+        background-color: #e98326;
+        width: 200px;
+    }
+    .main form img{
+        width: 100%;
+        margin-top: 20%;
+        margin-bottom: 10%;
+    }
+    footer{
+        background-color: #e4e4e4;
+    }
+    footer ul{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0 20px 0;
+    }
+    footer ul li{
+        float: left;
+        border-right:1px black solid ;
+        list-style: none;
+        text-align: center;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    }
