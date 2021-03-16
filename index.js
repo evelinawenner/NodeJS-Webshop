@@ -1,20 +1,33 @@
 const express = require("express");
 const mongoose = require("mongoose");
 const cookieParser = require("cookie-parser");
+const productRoute = require("./routes/productRoute")
+const userRoute = require("./routes/userRoute");
 
 require("dotenv").config();
 const app = express();
 
-const userRoute = require("./routes/userRoute");
+
+// för att kunna parsa/konvertera json data till js 
+app.use(express.json());
+
+// för att kunna parsa/konvertera ejs data till js 
+app.use(express.urlencoded({extended:false}))
+
+// för att kunna läsa cookies // behövs npm i cookie-parser
+app.use(cookieParser())
+
+
+
+
 
 //app middlewares
 app.set("view engine", "ejs");
 app.use("/static", express.static("public"));
 
-app.use(express.json());
-app.use(express.urlencoded({extended: false}));
-app.use(cookieParser());
 
+//router middlewares
+app.use(productRoute);
 app.use(userRoute);
 
 
