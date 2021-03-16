@@ -1,14 +1,16 @@
 const User = require("../models/user");
 const bcrypt = require("bcrypt");
 
-//render?
+const registerRender = async (req, res) => {
+    res.render("register.ejs", { err:"" });
+}
 
 const registerSubmit = async (req, res) => {
     const { name, email, password } = req.body;
 
     try {
         const salt = await bcrypt.genSalt(11);
-        const hashedPassword = await bcrypt.hash( password, salt);
+        const hashedPassword = await bcrypt.hash(password, salt);
 
         await new User({
             name: name,
@@ -23,5 +25,6 @@ const registerSubmit = async (req, res) => {
 }
 
 module.exports = {
+    registerRender,
     registerSubmit
 }

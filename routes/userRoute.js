@@ -2,12 +2,12 @@ const express = require("express");
 
 const router = express.Router();
 
-const { registerSubmit } = require("../controller/registerController");
+const { registerRender, registerSubmit } = require("../controller/registerController");
 const { loginCheck } = require("../controller/loginController");
 
 
 //Routes
-router.get("/register");
+router.get("/register", registerRender);
 
 router.post("/register", registerSubmit);
 
