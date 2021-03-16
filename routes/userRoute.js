@@ -2,13 +2,13 @@ const express = require("express");
 
 const router = express.Router();
 
-const { loginCheck } = require("../controller/loginController");
+const { loginRender, loginCheck } = require("../controller/loginController");
 const { registerRender, registerSubmit } = require("../controller/registerController");
 router.get("/register", registerRender);
 
 router.post("/register", registerSubmit);
 
-router.get("/login");
+router.get("/login", loginRender);
 
 router.post("/login", loginCheck);
 

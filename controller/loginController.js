@@ -3,7 +3,9 @@ const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 
-//render?
+const loginRender = async (req, res) => {
+    res.render("login.ejs", { err:"" });
+}
 
 const loginCheck = async (req, res) => {
     //skickar email från input
@@ -36,5 +38,6 @@ const loginCheck = async (req, res) => {
 }
 
 module.exports = {
+    loginRender,
     loginCheck
 }
