@@ -5,9 +5,17 @@ const cookieParser = require("cookie-parser");
 require("dotenv").config();
 const app = express();
 
+const userRoute = require("./routes/userRoute");
+
 //app middlewares
 app.set("view engine", "ejs");
 app.use("/static", express.static("public"));
+
+app.use(express.json());
+app.use(express.urlencoded({extended: false}));
+app.use(cookieParser());
+
+app.use(userRoute);
 
 
 //connection to db
