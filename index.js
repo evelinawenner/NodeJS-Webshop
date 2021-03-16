@@ -14,6 +14,8 @@ app.use(express.urlencoded({extended:false}))
 
 // för att kunna läsa cookies // behövs npm i cookie-parser
 app.use(cookieParser())
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }))
 
 //app middlewares
 app.set("view engine", "ejs");
