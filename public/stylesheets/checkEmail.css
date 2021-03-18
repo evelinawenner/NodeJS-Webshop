@@ -24,7 +24,6 @@
     
     .grid-item1{
         grid-area: 2/3/2/3;
-        font-family: 'Akaya Telivigala';
     }
     .grid-item2{
         grid-area: 2/7/2/7;
@@ -51,36 +50,14 @@
         background-color: #e98326;
         color: white;
     }
-    .grid-container2{
-        display: grid;
-        grid-template-rows: auto auto auto;
-    }
-    .grid-item3{
-        grid-area: 1/1/9/6;
-    }
-    .grid-item4{
-        grid-area: 1/6/9/9;
-        background-color: #e4e4e4;
-    }
-    .grid-item4 form{
-        width: 65%;
-        height: 80%;
-        margin: 6% 5% 5% 5%;
-        padding: 30px 50px 10px 50px;
-    }
-    .grid-item4 input{
-        width: 100%;
-        background-color: #c8c8c8;
-        margin-bottom: 10px;
-    }
-    .grid-item4 button{
-        width: 100%;
-        background-color: #e98326;
-        color: white;
-    }
-    .grid-item4 img{
-        width: 100%;
-        margin-top: 20%;
+    .main{
+        width: 400px;
+        height: 400px;
+        border: 1px solid gray 0.8;
+        background-color: rgba( 240, 240, 240, 0.6);
+        border-radius: 10px;
+        margin: 5% auto 5% auto;
+        padding: 20px;
     }
     footer{
         background-color: #e4e4e4;
@@ -89,7 +66,7 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        padding: 20px 0 20px 0;
+        padding: 15px 0 15px 0;
     }
     footer ul li{
         float: left;
