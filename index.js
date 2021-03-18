@@ -24,6 +24,7 @@ app.use(cookieParser())
 //app middlewares
 app.set("view engine", "ejs");
 app.use("/static", express.static("public"));
+app.use(express.static( __dirname + "/public"))
 
 
 //router middlewares
