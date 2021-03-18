@@ -22,13 +22,13 @@ const loginCheck = async (req, res) => {
     if(!validUser) return res.send("Lösenordet stämmer inte. Vänligen prova igen");
 
     //skapa token, byt ut "secretKey"!
-    const jwtToken = await jwt.sign({ user: user }, "secretKey");
+    const jwToken = await jwt.sign({ user: user }, process.env.SECRET_KEY);
 
-    if(jwtToken) {
-        const cookie = req.cookies.jwtToken
+    if(jwToken) {
+        const cookie = req.cookies.jwToken
         if(!cookie) {
             //maxAge: 1h
-            res.cookie("jwtToken", jwtToken, { maxAge: 3600000, httpOnly: true });
+            res.cookie("jwToken", jwToken, { maxAge: 3600000, httpOnly: true });
         }
         //returnerar användare till startsidan
         return res.redirect("/");

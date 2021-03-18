@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <head>
 <title>bookForm</title>
-<link rel="stylesheet" href="/static/stylesheets/bookForm.css" type="text/css">>
+<link rel="stylesheet" href="../../stylesheets/bookForm.css" type="text/css">
 <link rel="stylesheet" href="https://use.typekit.net/mhx2pta.css">
 
 </head>
@@ -13,6 +13,7 @@
         <h1>Lägg till bok</h1>
 <form action="/addBook" method="post">
 
+    <input type="file" name="imageurl" accept="image/png, image/jpeg">
     <input type="text" name="name" id="">
     <input type="text" name="description" id="">
     <input type="number" name="price" id="">

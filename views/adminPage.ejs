@@ -1,5 +1,18 @@
-<% courses.forEach( course => { %>
-    <div>  <%= course.name %></div>
-    <div>  <%= course.description %></div>
-    <div>  <%= course.price %></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <% books.forEach( book => { %>
+    <div>  <%= book.name %></div>
+    <div>  <%= book.description %></div>
+    <div>  <%= book.price %></div>
+    <div>  <%= book.image %></div>
   <% })  %>
+  <%-include ("bookForm.ejs")%>
+</body>
+</html>
+
