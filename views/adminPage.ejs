@@ -10,7 +10,8 @@
     <div>  <%= book.name %></div>
     <div>  <%= book.description %></div>
     <div>  <%= book.price %></div>
-    <div>  <%= book.image %></div>
+    <img src="<%= book.image %>" alt="">
+   
   <% })  %>
   <%-include ("bookForm.ejs")%>
 </body>

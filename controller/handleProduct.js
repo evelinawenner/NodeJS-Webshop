@@ -16,12 +16,10 @@ const adminHomeRender = async (req, res) => {
 
 const addBookFormSubmit = async (req, res) => {
   const { name, description, price } = req.body;
-  const path = req.body.imageurl;
-  console.log(path)
   // skapa course i database
   const book = await new Book({
     name: name,
-    image: "/uploads/" + req.body.imageurl,
+    image: "/uploads/" + req.file.filename,
     description: description,
     price: price,
   }).save();
