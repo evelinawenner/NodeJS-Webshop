@@ -7,6 +7,7 @@ const userRoute = require("./routes/userRoute");
 require("dotenv").config();
 const app = express();
 
+let path = require('path')
 
 // för att kunna parsa/konvertera json data till js 
 app.use(express.json());
@@ -23,13 +24,13 @@ app.use(cookieParser())
 
 //app middlewares
 app.set("view engine", "ejs");
-app.use("/static", express.static("public"));
+//app.use("/static", express.static("public"));
+app.use(express.static("public"));
 
 
 //router middlewares
 app.use(productRoute);
 app.use(userRoute);
-
 
 //connection to db
 const options = { 
