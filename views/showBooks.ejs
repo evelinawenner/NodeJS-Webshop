@@ -1,7 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+<nav>
+    <p class="p-nav">Home</p>
+    <p class="p-nav">Admin page</p>
+</nav>
 <h1>Lista av alla böcker</h1>
 
 
 <%  books.forEach( course => { %>
+    <div>
+        <%= book.image %>
+    </div>
     <div>
         <%= book.name %>
     </div>
@@ -9,5 +25,7 @@
         <%= book.price %>
     </div>
     <a href="/addToCart/<%=book.id%>">Add to Cart</a>
-    <div>=================</div>
  <%  }) %>
+
+</body>
+</html>

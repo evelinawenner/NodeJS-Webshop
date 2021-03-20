@@ -1,5 +1,41 @@
-<% courses.forEach( course => { %>
-    <div>  <%= course.name %></div>
-    <div>  <%= course.description %></div>
-    <div>  <%= course.price %></div>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="../../stylesheets/adminPage.css" type="text/css">
+  <link rel="stylesheet" href="https://use.typekit.net/mhx2pta.css">
+  <title>Document</title>
+</head>
+<body>
+  <div id="bookcontainer">
+    <h1>My books</h1>
+    <div id="bookwrapper">
+  <% books.forEach( book => { %>
+    <% if (book._id == id) { %>
+      <form action="/admin/edit/<%= id %> " method="post" id="editform" enctype="multipart/form-data">
+        <label for="imageurl">Add image</label>
+          <input type="file" name="imageurl" accept="image/png, image/jpeg"/>
+          <label for="name">Add name</label>
+          <input type="text" name="name" id="" value="<%= book.name %>" required>
+          <label for="description">Add description</label>
+          <textarea name="description" id=""  cols="15" rows="5" ><%= book.description %></textarea>
+          <label for="price">Add price</label>
+          <input type="number" name="price" id="" value="<%= book.price %>" required>
+          <button type="submit">Edit book</button>
+      </form>
+  <% } else { %>
+    <div>  <%= book.name %></div>
+    <div>  <%= book.description %></div>
+    <div>  <%= book.price %></div>
+    <img src="<%= book.image %>" alt="">
+    <a href="/admin/edit/<%= book._id %> ">edit</a>
+    <a href="/admin/delete/<%= book._id %> ">delete</a>
+    <% } %>
   <% })  %>
+</div>
+</div>
+  <%-include ("bookForm.ejs")%>
+</body>
+</html>
+

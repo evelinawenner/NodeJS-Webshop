@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
     email: { type: String, required: true, unique: true },
     password: { type: String, required: true },
     role: String,
+    token: String,
     resetToken: String,
     resetTokenExpiration: Date,
     shoppingCart: [
@@ -17,8 +18,25 @@ const userSchema = new mongoose.Schema({
         {
 
         }
-    ]
+    ],
+    bookList: [{
+        type:mongoose.Schema.Types.ObjectId, 
+        ref: "book"
+    }] 
 });
+
+userSchema.methods.addBookList = function(bookId){
+
+    this.bookList.push(bookId);
+    this.save();
+
+}
+
+userSchema.methods.removeFromBookList = function (productId) {
+    let index = this.bookList.indexOf(productId);
+    this.bookList.splice(index, 1);
+    this.save();
+}
 
 const User = mongoose.model("user", userSchema);
 
