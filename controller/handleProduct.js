@@ -6,6 +6,7 @@ const adminHomeRender = async (req, res) => {
   await Book.find().exec(function (err, books) {
     res.render("adminPage.ejs", {
       books,
+      id: ""
     });
   });
 };
@@ -38,8 +39,57 @@ const showAdminBooks = async (req, res) => {
     "bookList"
   );
   console.log(user.bookList);
-  res.render("adminPage.ejs", { books: user.bookList, err: "" });
+  res.render("adminPage.ejs", { books: user.bookList, id: "", err: ""});
 };
+
+const adminEditBookRender = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const user = await User.findOne({_id: req.user.user._id}).populate("bookList");
+        res.render("adminPage.ejs", {id:id, books: user.bookList});
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const adminEditBook = async (req,res) => {
+    try {
+        if (req.file == undefined) {
+            console.log("undefined");
+            await Book.updateOne({_id: req.params.id}, {
+                name: req.body.name,
+                description: req.body.description,
+                price: req.body.price,
+            });
+        }else {
+            console.log("defined");
+            await Book.updateOne({_id: req.params.id}, {
+                name: req.body.name,
+                image: "/uploads/" + req.file.filename,
+                description: req.body.description,
+                price: req.body.price,
+            });
+        }
+        
+        res.redirect("/admin");
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+const adminDeleteBook = async (req, res) => {
+    try {
+        const user = await User.findOne({_id: req.user.user._id});
+        const id = req.params.id;
+
+        user.removeFromBookList(id);
+        await Book.deleteOne({_id: id});
+        
+        res.redirect("/admin")
+    } catch (error) {
+        console.log(error);
+    }
+}
 
 const showBooks = async (req, res) => {
   const books = await Book.find();
@@ -51,4 +101,7 @@ module.exports = {
   addBookFormSubmit,
   showBooks,
   showAdminBooks,
+  adminEditBookRender,
+  adminEditBook,
+  adminDeleteBook
 };
