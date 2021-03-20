@@ -32,6 +32,12 @@ userSchema.methods.addBookList = function(bookId){
 
 }
 
+userSchema.methods.removeFromBookList = function (productId) {
+    let index = this.bookList.indexOf(productId);
+    this.bookList.splice(index, 1);
+    this.save();
+}
+
 const User = mongoose.model("user", userSchema);
 
 module.exports = User;
