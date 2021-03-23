@@ -14,7 +14,7 @@
 <h1>Lista av alla böcker</h1>
 
 
-<%  books.forEach( course => { %>
+<%  books.forEach( book => { %>
     <div>
         <%= book.image %>
     </div>
@@ -24,7 +24,7 @@
     <div>
         <%= book.price %>
     </div>
-    <a href="/addToCart/<%=book.id%>">Add to Cart</a>
+    <a href="/showBook/<%=book._id%>">Visa bok</a>
  <%  }) %>
 
 </body>

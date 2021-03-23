@@ -6,14 +6,14 @@ const {
     showAdminBooks,
     adminEditBookRender,
     adminEditBook,
-    adminDeleteBook
-    
+    adminDeleteBook,
+    showBook
  } = require("../controller/handleProduct");
  
  const {upload} = require("./../middleware/upload");
  const express = require("express");
  const verifyAdmin = require("../middleware/verifyAdmin")
- const verifyUser = require("../middleware/verifyUser");
+ //const verifyUser = require("../middleware/verifyUser");
 
 const router = express.Router();
 
@@ -21,11 +21,14 @@ const router = express.Router();
 router.get("/admin", verifyAdmin, adminHomeRender) 
 // router.get("/addBook", verifyAdmin, addBookForm);
 router.post("/addBook", verifyAdmin, upload.single("imageurl"), addBookFormSubmit);
-router.get("/", verifyUser, showBooks);
+//removed verifyUser, för att se hemsidan
+router.get("/", showBooks);
 router.get("/showMyBooks", verifyAdmin, showAdminBooks)
 
 router.get("/admin/edit/:id",verifyAdmin, adminEditBookRender)
 router.post("/admin/edit/:id",verifyAdmin,upload.single("imageurl"), adminEditBook)
 router.get("/admin/delete/:id", verifyAdmin, adminDeleteBook)
+
+router.get("/showBook/:id", showBook);
 
  module.exports = router;

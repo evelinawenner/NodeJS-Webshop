@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <img src="<%= book.image %>" alt="<%= book.name %>">
+    </div>
+    <div>
+        <h1><%= book.name %></h1>
+        <h6>Författare</h6>
+        <button>-</button>
+        <input type="number" name="" id="">
+        <button>+</button>
+        <h6><%= book.price %></h6>
+        <button>Lägg i wishlist</button>
+        <button>Köp</button>
+    </div>
+    <div>
+        <%= book.description %>
+    </div>
+</body>
+</html>
