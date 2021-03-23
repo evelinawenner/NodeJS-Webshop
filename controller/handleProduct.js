@@ -95,6 +95,17 @@ const showBooks = async (req, res) => {
   const books = await Book.find();
   res.render("showBooks.ejs", { err: " ", books: books });
 };
+
+const showBook = async (req, res) => {
+  try{
+    const book = await Book.findOne({_id: req.params.id});
+    res.render("singleBook.ejs", {err: " ", book: book});
+  } catch (error) {
+    console.log(error);
+  }
+  
+}
+
 module.exports = {
   adminHomeRender,
   // addBookForm,
@@ -103,5 +114,6 @@ module.exports = {
   showAdminBooks,
   adminEditBookRender,
   adminEditBook,
-  adminDeleteBook
+  adminDeleteBook,
+  showBook
 };
