@@ -1,0 +1,179 @@
+@media only screen and (min-width: 1080px) {
+    body{
+        font-family: Arial, Helvetica, sans-serif;
+    }
+    .header{
+        background-color: #e4e4e4;
+        display: grid;
+        grid-template-rows: auto auto auto;
+        padding-bottom: 3%;
+    }
+    .icon{
+        grid-area: 1/8/1/8;
+        width: 120px;
+        height: 30px;
+        background-color: #e98326;
+        padding: 3px 3px 5px 3px;
+    }
+    .icon a{
+        padding: 3px;
+        color: white;
+        margin: 0 2% 0 2%;
+        justify-content: space-around;
+    }
+    
+    .grid-item1{
+        grid-area: 2/3/2/3;
+        font-family: 'Akaya Telivigala';
+    }
+    .grid-item2{
+        grid-area: 2/7/2/7;
+        font-size: 1rem;
+    }
+    nav{
+        height: 30px;
+    }
+    nav li{
+        float: left;
+        list-style: none;
+    }
+    nav li a{
+        color: black;
+        text-decoration: none;
+        width: 50px;
+        padding: 5px;
+        margin-right: 10px;
+        margin-left: 10px;
+        font-size: 0.8rem;
+        font-family: 'Times New Roman', Times, serif;
+    }
+    nav li a:hover{
+        background-color: #e98326;
+        color: white;
+    }
+    .main{
+        width: 100%;
+    }
+    .banner{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(11, 106, 129);
+    }
+    .banner img{
+        width: 60%;
+        
+    }
+    .hot-sell{
+        width: 100%;
+    }
+    .hot-sell > div{
+        height: 50%;
+        margin: 0 auto 0 auto;
+    }
+    .one{
+        background-image: url("../img/Skarmbild\ 2021-03-10\ 154829.png");
+        display: grid;
+        background-position: center;
+    }
+    .two{
+        background-color: #e4e4e4;
+        display: grid;
+    }
+    .infor-left{
+        grid-area: 1/3/1/3;
+        margin: 10% 0 0 0;
+    }
+    .hot-sell p{
+        margin: 5% 0 0 0;
+    }
+    .one img{
+        grid-area: 1/2/1/2;
+        padding: 10px;
+        margin: 3% 0 3% 0;
+    }
+    .two img{
+        grid-area: 1/4/1/4;
+        padding: 10px;
+        margin: 3% 0 3% 0;
+    }
+    .three img{
+        grid-area: 1/2/1/2;
+        padding: 10px;
+        margin: 3% 0 3% 0;
+    }
+    .hot-sell button{
+        margin: 30px 0 0 0;
+        background-color: #e98326;
+        color: white;
+        width: 150px;
+        border: none;
+    }
+    .infor-right{
+        grid-area: 1/3/1/3;
+        margin: 10% 0 0 0;
+    }
+    .three{
+        background-image: url("../img/P260701-10.jpg");
+        display: grid;
+    }
+    .kund-favorit{
+        width: 100%;       
+    }
+    .kund-favorit h3{
+        text-align: center;
+        margin: 3% 0 3% 0;
+    }
+    hr{
+        margin-bottom: 3%;
+        width: 50%;
+        margin: 0 auto 0 auto;
+    }
+    .box{
+        display: flex;
+        height: 300px;
+        margin-left: 20%;
+        
+    }
+    .bookInfor img{
+        width: 100px;
+        margin: 3%;
+        height: 150px;
+    }
+    .bookInfor{
+        width: 150px;
+        text-align: center;
+        margin: 2%;
+    }
+    .bookInfor p{
+        font-size: 0.8rem;
+        font-weight: bolder;
+    }
+    .bookInfor a{
+        background-color: #e98326;
+        width: 100px;
+        height: 50px;
+        padding: 5px;
+        color: white;
+        text-decoration: none;
+    }
+    footer{
+        background-color: #e4e4e4;
+    }
+    footer ul{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0 20px 0;
+    }
+    footer ul li{
+        float: left;
+        border-right:1px black solid ;
+        list-style: none;
+        text-align: center;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+    }

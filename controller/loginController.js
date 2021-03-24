@@ -9,7 +9,7 @@ const loginRender = async (req, res) => {
 
 const loginCheck = async (req, res) => {
     //skickar email från input
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     //sök efter användare i db
     const user = await User.findOne({ email: email });
 
@@ -31,7 +31,15 @@ const loginCheck = async (req, res) => {
             res.cookie("jwToken", jwToken, { maxAge: 3600000, httpOnly: true });
         }
         //returnerar användare till startsidan
-        return res.redirect("/");
+        
+        const userRole = await User.findOne({role:role})
+        if(userRole === "admin") {
+            return res.render("/adminHome",{user:user}, {err: " "})
+        }else{
+            return res.render("showBookUser.ejs", {err:" ", user:user, books:[]})
+        }
+        
+        //return res.redirect("/");
     }
     //användare behöver logga in igen pga expired token
     return res.redirect("/login");

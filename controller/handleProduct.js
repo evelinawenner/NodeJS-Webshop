@@ -1,12 +1,19 @@
 const Book = require("../models/product");
 require("dotenv").config();
 const User = require("../models/user");
-
+const showHomeAdmin = async(req,res) =>{
+  res.render("showBookAdmin.ejs")
+}
+const showHomeUser = async(req,res) =>{
+  res.render("showBookUser.ejs")
+}
 const adminHomeRender = async (req, res) => {
+  const user = await User.findOne({ _id: req.user.user._id });
   await Book.find().exec(function (err, books) {
     res.render("adminPage.ejs", {
       books,
-      id: ""
+      id: "",
+      user:user
     });
   });
 };
@@ -95,6 +102,15 @@ const showBooks = async (req, res) => {
   const books = await Book.find();
   res.render("showBooks.ejs", { err: " ", books: books });
 };
+
+const showBook = async (req, res) => {
+  try{
+    const book = await Book.findOne({_id: req.params.id});
+    res.render("singleBook.ejs", {err: " ", book: book});
+  } catch (error) {
+    console.log(error);
+  }
+}
 module.exports = {
   adminHomeRender,
   // addBookForm,
@@ -103,5 +119,8 @@ module.exports = {
   showAdminBooks,
   adminEditBookRender,
   adminEditBook,
-  adminDeleteBook
+  adminDeleteBook,
+  showBook,
+  showHomeAdmin,
+  showHomeUser
 };
