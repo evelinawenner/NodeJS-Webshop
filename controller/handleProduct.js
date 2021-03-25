@@ -98,10 +98,11 @@ const showBooks = async (req, res) => {
     const productsPerReq = 4;
     const pageGeneration = Math.ceil(totalProducts/productsPerReq);
 
-    const productPopulation = productsPerReq * page;
+    const showProducts = productsPerReq * page;
 
-    const books = await Book.find().limit(productPopulation);
-    res.render("showBooks.ejs", { err: " ", books: books });
+    const books = await Book.find().limit(showProducts);
+    res.render("showBooks.ejs", { err: " ", books,
+    totalProducts, productsPerReq, pageGeneration, showProducts });
   } catch(error) {
     console.log(error);
   }
