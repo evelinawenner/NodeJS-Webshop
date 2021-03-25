@@ -92,8 +92,19 @@ const adminDeleteBook = async (req, res) => {
 }
 
 const showBooks = async (req, res) => {
-  const books = await Book.find();
-  res.render("showBooks.ejs", { err: " ", books: books });
+  const page = +req.query.page || 1;
+  try {
+    const totalProducts = await Book.find().countDocuments();
+    const productsPerReq = 4;
+    const pageGeneration = Math.ceil(totalProducts/productsPerReq);
+
+    const productPopulation = productsPerReq * page;
+
+    const books = await Book.find().limit(productPopulation);
+    res.render("showBooks.ejs", { err: " ", books: books });
+  } catch(error) {
+    console.log(error);
+  }
 };
 
 const showBook = async (req, res) => {
