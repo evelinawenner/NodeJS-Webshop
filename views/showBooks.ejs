@@ -27,5 +27,13 @@
     <a href="/showBook/<%=book._id%>">Visa bok</a>
  <%  }) %>
 
+<div>
+    <% if(pageGeneration !== showProducts/productsPerReq) { %>
+        <a href="/?page=<%=(showProducts/productsPerReq)+1%>">Ladda fler böcker</a>
+    <% } else { %>
+        <a href="/?page=1">Visa färre böcker</a>
+    <% } %>
+</div>
+
 </body>
 </html>
