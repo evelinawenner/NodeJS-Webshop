@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=di, initial-scale=1.0">
     <title>Bock Shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/showBookHome.css">
+    <link rel="stylesheet" href="/stylesheets/showBooks.css">
     <link href='https://fonts.googleapis.com/css?family=Akaya Telivigala' rel='stylesheet'>
 </head>
 <body>
@@ -42,6 +42,7 @@
             
         </div>
         <div class="hot-sell">
+            <div class="bk-color">
             <div class="one">
                 <img src="../img/terapeuten-som-inte-visste-vad-han-gjorde_pocket.jpg" alt="" srcset="">
                 <div class="infor-right">
@@ -49,6 +50,7 @@
                 <p>Max Schüllerqvist</p>
                 <button>Show More</button>
                 </div>
+            </div>
             </div>
             <div class="two">
                 <img src="../img/_skyddsangeln.jpg" alt="">
@@ -58,6 +60,7 @@
                 <button>Show More</button>
                 </div>
             </div>
+        
             <div class="three">
                 <img src="../img/gott-om-tid_pocket.jpg" alt="">
                 <div class="infor-right">
@@ -75,6 +78,7 @@
                     <div class="bookInfor">
                     <img src="<%= book.image %>" alt="<%= book.image %>"">
                     <p><%= book.name %></p>
+                    <p><%= book.author %></p>
                     <h5><%= book.price %></h5>
                     <a href="/showBook/<%=book._id%>">Show More</a>
                     </div>

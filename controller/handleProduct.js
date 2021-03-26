@@ -2,10 +2,12 @@ const Book = require("../models/product");
 require("dotenv").config();
 const User = require("../models/user");
 const showHomeAdmin = async(req,res) =>{
-  res.render("showBookAdmin.ejs")
+  const user = await User.findOne({ _id: req.user.user._id });
+  res.render("showBookAdmin.ejs", {user:user, books})
 }
 const showHomeUser = async(req,res) =>{
-  res.render("showBookUser.ejs")
+  const user = await User.findOne({ _id: req.user.user._id });
+  res.render("showBookUser.ejs", {user:user, books})
 }
 const adminHomeRender = async (req, res) => {
   const user = await User.findOne({ _id: req.user.user._id });
@@ -46,14 +48,14 @@ const showAdminBooks = async (req, res) => {
     "bookList"
   );
   console.log(user.bookList);
-  res.render("adminPage.ejs", { books: user.bookList, id: "", err: ""});
+  res.render("adminPage.ejs", { books: user.bookList, id: "", err: "", user:user});
 };
 
 const adminEditBookRender = async (req, res) => {
     try {
         const id = req.params.id;
         const user = await User.findOne({_id: req.user.user._id}).populate("bookList");
-        res.render("adminPage.ejs", {id:id, books: user.bookList});
+        res.render("adminPage.ejs", {id:id, books: user.bookList, user:user});
     } catch (error) {
         console.log(error);
     }
@@ -105,10 +107,21 @@ const showBooks = async (req, res) => {
 
 const showBook = async (req, res) => {
   try{
+    const user = await User.findOne({user: req.params.name});
     const book = await Book.findOne({_id: req.params.id});
-    res.render("singleBook.ejs", {err: " ", book: book});
+    res.render("singleBook.ejs", {err: " ",user:user, book: book});
   } catch (error) {
     console.log(error);
+  }
+}
+const singleBookAdmin = async(req,res) =>{
+  //const role = req.body
+  const role = await User.findOne(req.user.role)
+  const userRole = await User.findOne({role:role})
+  if(userRole === "admin"){
+    return res.render("singleBookAdmin.ejs",{user:user, err: " ", books:books})
+  }else{
+    return res.render("singleBookUser.ejs", {err:" ", user:user, books:books})
   }
 }
 module.exports = {
@@ -122,5 +135,6 @@ module.exports = {
   adminDeleteBook,
   showBook,
   showHomeAdmin,
-  showHomeUser
+  showHomeUser,
+  singleBookAdmin
 };

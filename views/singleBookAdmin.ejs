@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=di, initial-scale=1.0">
     <title>Bock Shop</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
-    <link rel="stylesheet" href="/stylesheets/showBooks.css">
+    <link rel="stylesheet" href="/stylesheets/singleBook.css">
     <link href='https://fonts.googleapis.com/css?family=Akaya Telivigala' rel='stylesheet'>
 </head>
 <body>
@@ -19,9 +19,9 @@
                 <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
                     <path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
                   </svg></a>
-                  <p class="person">Welcome <%= user.name %> 
-                  <a href="/admin">My Page</a>
-                <a href="/logut">Logg out</a></p>
+                  <p class="personAdmin">Welcome <%= user.name %> 
+                    <a href="/admin">My Page</a>
+                  <a href="/logut">Logg out</a></p>
             </div>
                 <div class="grid-item1"><h1>Böcker</h1></div>
                 <div class="grid-item2">
@@ -36,56 +36,30 @@
                 </div>
     </div>
     <div class="main">
-        <div class="banner">
-            
+        <div class="boken">
+            <div class="imag">
+                <img src="<%= book.image %>" alt="<%= book.name %>">
+                
+            </div>
+            <div class="information">
+                <h1><%= book.name %></h1>
+                <h6><%= book.author %></h6>
+                <h6><%= book.price %> :-</h6>
+                <div class="quantity">
+                <button>-</button>
+                <input type="number">
+                <button>+</button>
+                </div>
+                <button>buy</button>
+                <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                  </svg></a>
+                <div class="description"><%= book.description %></div>
+            </div>
+            <div class="annons">
                 <img src="../img/2997792.jpg" alt="" srcset="">
-            
-        </div>
-        <div class="hot-sell">
-            <div class="bk-color">
-                <div class="one">
-                    <img src="../img/terapeuten-som-inte-visste-vad-han-gjorde_pocket.jpg" alt="" srcset="">
-                    <div class="infor-right">
-                    <h1>Terapeuten som inte<br>visste vad han gjorde</h1>
-                    <p>Max Schüllerqvist</p>
-                    <button>Show More</button>
-                    </div>
-                </div>
-                </div>
-                <div class="two">
-                    <img src="../img/_skyddsangeln.jpg" alt="">
-                    <div class="infor-left">
-                    <h1>Terapeuten som inte<br>visste vad han gjorde</h1>
-                    <p>Max Schüllerqvist</p>
-                    <button>Show More</button>
-                    </div>
-                </div>
-            <div class="three">
-                <img src="../img/gott-om-tid_pocket.jpg" alt="">
-                <div class="infor-right">
-                <h1>Terapeuten som inte<br>visste vad han gjorde</h1>
-                <p>Max Schüllerqvist</p>
-                <button>Show More</button>
-                </div>
             </div>
         </div>
-        <div class="kund-favorit">
-            <h3>New Books</h3>
-            <hr>
-            <div class="box">
-                <%  books.forEach( book => { %>
-                    <div class="bookInfor">
-                    <img src="<%= book.image %>" alt="<%= book.image %>"">
-                    <p><%= book.name %></p>
-                    <p><%= book.author %></p>
-                    <h5><%= book.price %></h5>
-                    <a href="/showBook/<%=book._id%>">Show More</a>
-                    </div>
-                 <%  }) %>
-            </div>
-        </div>
-        
-        
     </div>
     <footer>
         <ul>

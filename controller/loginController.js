@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Book = require("../models/product");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -33,10 +34,11 @@ const loginCheck = async (req, res) => {
         //returnerar användare till startsidan
         
         const userRole = await User.findOne({role:role})
+        const books = await Book.find();
         if(userRole === "admin") {
-            return res.render("/adminHome",{user:user}, {err: " "})
+            return res.render("showBookAdmin.ejs",{user:user, err: " ", books:books})
         }else{
-            return res.render("showBookUser.ejs", {err:" ", user:user, books:[]})
+            return res.render("showBookUser.ejs", {err:" ", user:user, books:books})
         }
         
         //return res.redirect("/");
