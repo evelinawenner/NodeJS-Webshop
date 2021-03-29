@@ -108,8 +108,9 @@ const showBook = async (req, res) => {
 
 const showCart = async (req, res)=>{
   try{
+    const user = await User.findOne({_id:req.user.user._id})
     console.log('hejssaaan')
-  res.render("shoppingCart.ejs", { err: ""});
+  res.render("shoppingCart.ejs", { shoppingCart:user.shoppingCart, err: ""});
   }
  catch (error) {
   console.log(error);
@@ -123,8 +124,7 @@ const addToShoppingCart = async (req, res) => {
     user.addToCart(bookId);
     const cartUser = await (await User.findOne({_id:req.user.user._id})).populate("ShoppingCart");
     cartUser.addToCart(book._id);
-
-  res.redirect("/showbooks");
+  res.redirect("/");
   }
   catch (error) {
     console.log(error);

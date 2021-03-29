@@ -18,7 +18,7 @@
         <button>+</button>
         <h6><%= book.price %></h6>
         <button>Lägg i wishlist</button>
-        <button>Köp</button>
+        <a href="/addToCart/<%=book.id%>"><button >Köp</button></a>
     </div>
     <div>
         <%= book.description %>
