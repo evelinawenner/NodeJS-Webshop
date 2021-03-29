@@ -2,30 +2,109 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=di, initial-scale=1.0">
+    <title>Bock Shop</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl" crossorigin="anonymous">
+    <link rel="stylesheet" href="/stylesheets/showBooks.css">
+    <link href='https://fonts.googleapis.com/css?family=Akaya Telivigala' rel='stylesheet'>
 </head>
 <body>
     
-<nav>
-    <p class="p-nav">Home</p>
-    <p class="p-nav">Admin page</p>
-</nav>
-<h1>Lista av alla böcker</h1>
+    <div class="header">
+            <div class="icon">
+                <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-cart4" viewBox="0 0 16 16">
+                    <path d="M0 2.5A.5.5 0 0 1 .5 2H2a.5.5 0 0 1 .485.379L2.89 4H14.5a.5.5 0 0 1 .485.621l-1.5 6A.5.5 0 0 1 13 11H4a.5.5 0 0 1-.485-.379L1.61 3H.5a.5.5 0 0 1-.5-.5zM3.14 5l.5 2H5V5H3.14zM6 5v2h2V5H6zm3 0v2h2V5H9zm3 0v2h1.36l.5-2H12zm1.11 3H12v2h.61l.5-2zM11 8H9v2h2V8zM8 8H6v2h2V8zM5 8H3.89l.5 2H5V8zm0 5a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0zm9-1a1 1 0 1 0 0 2 1 1 0 0 0 0-2zm-2 1a2 2 0 1 1 4 0 2 2 0 0 1-4 0z"/>
+                  </svg></a>
+                <a href=""><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-heart" viewBox="0 0 16 16">
+                    <path d="M8 2.748l-.717-.737C5.6.281 2.514.878 1.4 3.053c-.523 1.023-.641 2.5.314 4.385.92 1.815 2.834 3.989 6.286 6.357 3.452-2.368 5.365-4.542 6.286-6.357.955-1.886.838-3.362.314-4.385C13.486.878 10.4.28 8.717 2.01L8 2.748zM8 15C-7.333 4.868 3.279-3.04 7.824 1.143c.06.055.119.112.176.171a3.12 3.12 0 0 1 .176-.17C12.72-3.042 23.333 4.867 8 15z"/>
+                  </svg></a>
+                <a href="/login"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-person-circle" viewBox="0 0 16 16">
+                    <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                    <path fill-rule="evenodd" d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z"/>
+                  </svg></a>
+            </div>
+                <div class="grid-item1"><h1>Böcker</h1></div>
+                <div class="grid-item2">
+                    <nav>
+                        <ul>
+                            <li><a href="/">HOME</a></li>
+                            <li><a href="blog">BLOG</a></li>
+                            <li><a href="shop">SHOP</a></li>
+                            <li><a href="contakt">CONTACT US</a></li>
+                        </ul>
+                    </nav>
+                </div>
 
+    </div>
+    <div class="main">
+        <div class="banner">
+            <img src="../img/2997792.jpg" alt="">
+            
+        </div>
+        <div class="hot-sell">
+            <div class="bk-color">
+            <div class="one">
+                <img src="../img/terapeuten-som-inte-visste-vad-han-gjorde_pocket.jpg" alt="" srcset="">
+                <div class="infor-right">
+                <h1>Terapeuten som inte<br>visste vad han gjorde</h1>
+                <p>Max Schüllerqvist</p>
+                <button>Show More</button>
+                </div>
+            </div>
+            </div>
+            <div class="two">
+                <img src="../img/_skyddsangeln.jpg" alt="">
+                <div class="infor-left">
+                <h1>Terapeuten som inte<br>visste vad han gjorde</h1>
+                <p>Max Schüllerqvist</p>
+                <button>Show More</button>
+                </div>
+            </div>
+        
+            <div class="three">
+                <img src="../img/gott-om-tid_pocket.jpg" alt="">
+                <div class="infor-right">
+                <h1>Terapeuten som inte<br>visste vad han gjorde</h1>
+                <p>Max Schüllerqvist</p>
+                <button>Show More</button>
+                </div>
+            </div>
+        </div>
+        <div class="kund-favorit">
+            <h3>New Books</h3>
+            <hr>
+            <div class="box">
+                <%  books.forEach( book => { %>
+                    <div class="bookInfor">
+                    <img src="<%= book.image %>" alt="<%= book.image %>"">
+                    <p><%= book.name %></p>
+                    <p><%= book.author %></p>
+                    <h5><%= book.price %></h5>
+                    <a href="/showBook/<%=book._id%>">Show More</a>
+                    </div>
+                 <%  }) %>
+            </div>
+        </div>
+        
+        
+    </div>
 
-<%  books.forEach( book => { %>
-    <div>
-        <%= book.image %>
-    </div>
-    <div>
-        <%= book.name %>
-    </div>
-    <div>
-        <%= book.price %>
-    </div>
-    <a href="/showBook/<%=book._id%>">Visa bok</a>
- <%  }) %>
+    <footer>
+        <ul>
+            <li>© 2021 Bokus AB</li>
+            <li>Org.nr 556493-0492</li>
+            <li>Sidan använder cookies</li>
+            <li>Behandling av personuppgifter</li>
+            <li>Avtalsvillkor</li>
+        </ul>
+
+            </div>
+        </div>
+    </footer>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js" integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.6.0/dist/umd/popper.min.js" integrity="sha384-KsvD1yqQ1/1+IA7gi3P0tyJcT3vR+NdBTt13hSJ2lnve8agRGXTTyNaBYmCR/Nwi" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.min.js" integrity="sha384-nsg8ua9HAw1y0W1btsyWgBklPnCUAFLuTMS2G72MMONqmOymq585AcH49TLBQObG" crossorigin="anonymous"></script>
 
 </body>
 </html>

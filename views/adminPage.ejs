@@ -3,39 +3,66 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="stylesheet" href="../../stylesheets/adminPage.css" type="text/css">
+  <link rel="stylesheet" href="/stylesheets/adminPage.css" type="text/css">
   <link rel="stylesheet" href="https://use.typekit.net/mhx2pta.css">
-  <title>Document</title>
+  <title>Admin Page</title>
 </head>
 <body>
   <div id="bookcontainer">
-    <h1>My books</h1>
+    <%-include ("bookForm.ejs")%>
+    <h5>My Book List</h5>
     <div id="bookwrapper">
   <% books.forEach( book => { %>
     <% if (book._id == id) { %>
+      <div class="editBookInfor">
       <form action="/admin/edit/<%= id %> " method="post" id="editform" enctype="multipart/form-data">
+        <div>
         <label for="imageurl">Add image</label>
           <input type="file" name="imageurl" accept="image/png, image/jpeg"/>
+</div>
+<div>
           <label for="name">Add name</label>
-          <input type="text" name="name" id="" value="<%= book.name %>" required>
-          <label for="description">Add description</label>
-          <textarea name="description" id=""  cols="15" rows="5" ><%= book.description %></textarea>
+          <input type="text" name="name" id="" value="<%= book.name %>" required placeholder="Product Name">
+
+          <label for="name">Add Author</label>
+          <input type="text" name="author" id="" value="<%= book.author %>" required placeholder="Author Name">
+
           <label for="price">Add price</label>
-          <input type="number" name="price" id="" value="<%= book.price %>" required>
+          <input type="number" name="price" id="price" value="<%= book.price %>" required placeholder="Product Price">
+      </div>    
+          <div>
+          <label for="description">Add description</label>
+          <textarea name="description" placeholder="Product Description" id="description"  cols="15" rows="5" ><%= book.description %></textarea>
+</div>
           <button type="submit">Edit book</button>
       </form>
+    </div>
   <% } else { %>
-    <div>  <%= book.name %></div>
-    <div>  <%= book.description %></div>
-    <div>  <%= book.price %></div>
-    <img src="<%= book.image %>" alt="">
-    <a href="/admin/edit/<%= book._id %> ">edit</a>
-    <a href="/admin/delete/<%= book._id %> ">delete</a>
+    <div class="addProdukt">
+      <img src="<%= book.image %>" alt="">
+      <div>  <%= book.name %></div>
+      <div>  <%= book.author %></div>
+      <div>  <%= book.description %></div>
+      <div>  <%= book.price %></div>
+      <a href="/admin/edit/<%= book._id %> ">edit</a>
+      <a href="/admin/delete/<%= book._id %> ">delete</a>
+    </div>
     <% } %>
   <% })  %>
 </div>
 </div>
-  <%-include ("bookForm.ejs")%>
+<footer>
+  <ul>
+      <li>© 2021 Bokus AB</li>
+      <li>Org.nr 556493-0492</li>
+      <li>Sidan använder cookies</li>
+      <li>Behandling av personuppgifter</li>
+      <li>Avtalsvillkor</li>
+  </ul>
+
+      </div>
+  </div>
+</footer>
 </body>
 </html>
 
