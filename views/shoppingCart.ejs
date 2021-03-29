@@ -14,11 +14,11 @@
     <p><a href="/">Shop here!</a></p>
 <% } else { %>
 
-    <% shoppingCart.forEach((book) => { %>
+    <% shoppingCart.forEach(book => { %>
 
     
 <div class="bookincart">
-    <img src=<%=book.image%>>
+    <img src="<%=book.image%>">
     <p><%=book.name%></p>
 </div>
 </div>

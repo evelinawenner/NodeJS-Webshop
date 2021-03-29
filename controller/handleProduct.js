@@ -110,6 +110,7 @@ const showCart = async (req, res)=>{
   try{
     const user = await User.findOne({_id:req.user.user._id})
     console.log('hejssaaan')
+    const shoppingCart = await user.populate("shoppingCart");
   res.render("shoppingCart.ejs", { shoppingCart:user.shoppingCart, err: ""});
   }
  catch (error) {
@@ -120,10 +121,11 @@ const showCart = async (req, res)=>{
 const addToShoppingCart = async (req, res) => {
   try{
     const bookId = req.params.id
-    const user = await User.findOne({_id:req.user.user._id})
-    user.addToCart(bookId);
-    const cartUser = await (await User.findOne({_id:req.user.user._id})).populate("ShoppingCart");
-    cartUser.addToCart(book._id);
+    //const user = await User.findOne({_id:req.user.user._id})
+    const book = await Book.findOne({_id: req.params.id});
+   // user.addToCart(bookId);
+    const cartUser = await (await User.findOne({_id:req.user.user._id})).populate("shoppingCart");
+    cartUser.addToCart(bookId);
   res.redirect("/");
   }
   catch (error) {
