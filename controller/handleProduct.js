@@ -106,6 +106,33 @@ const showBook = async (req, res) => {
   
 }
 
+const showCart = async (req, res)=>{
+  try{
+    console.log('hejssaaan')
+  res.render("shoppingCart.ejs", { err: ""});
+  }
+ catch (error) {
+  console.log(error);
+}
+}
+
+const addToShoppingCart = async (req, res) => {
+  try{
+    const bookId = req.params.id
+    const user = await User.findOne({_id:req.user.user._id})
+    user.addToCart(bookId);
+    const cartUser = await (await User.findOne({_id:req.user.user._id})).populate("ShoppingCart");
+    cartUser.addToCart(book._id);
+
+  res.redirect("/showbooks");
+  }
+  catch (error) {
+    console.log(error);
+   }
+}
+
+
+
 module.exports = {
   adminHomeRender,
   // addBookForm,
@@ -115,5 +142,7 @@ module.exports = {
   adminEditBookRender,
   adminEditBook,
   adminDeleteBook,
-  showBook
+  showBook,
+  showCart,
+  addToShoppingCart
 };

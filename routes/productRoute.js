@@ -7,13 +7,15 @@ const {
     adminEditBookRender,
     adminEditBook,
     adminDeleteBook,
-    showBook
+    showBook,
+    showCart,
+    addToShoppingCart
  } = require("../controller/handleProduct");
  
  const {upload} = require("./../middleware/upload");
  const express = require("express");
  const verifyAdmin = require("../middleware/verifyAdmin")
- //const verifyUser = require("../middleware/verifyUser");
+ const verifyUser = require("../middleware/verifyUser");
 
 const router = express.Router();
 
@@ -30,5 +32,8 @@ router.post("/admin/edit/:id",verifyAdmin,upload.single("imageurl"), adminEditBo
 router.get("/admin/delete/:id", verifyAdmin, adminDeleteBook)
 
 router.get("/showBook/:id", showBook);
+router.get("/addToCart/:id", verifyUser, addToShoppingCart)
+router.get("/shoppingcart", verifyUser, showCart)
+
 
  module.exports = router;
