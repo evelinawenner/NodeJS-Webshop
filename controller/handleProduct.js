@@ -25,10 +25,10 @@ const adminHomeRender = async (req, res) => {
 // }
 
 const addBookFormSubmit = async (req, res) => {
-  const { name, description, price } = req.body;
-  // skapa course i database
+  const { name, author, description, price } = req.body;
   const book = await new Book({
     name: name,
+    author: author,
     image: "/uploads/" + req.file.filename,
     description: description,
     price: price,
@@ -67,6 +67,7 @@ const adminEditBook = async (req,res) => {
             console.log("undefined");
             await Book.updateOne({_id: req.params.id}, {
                 name: req.body.name,
+                author: req.body.author,
                 description: req.body.description,
                 price: req.body.price,
             });
@@ -74,6 +75,7 @@ const adminEditBook = async (req,res) => {
             console.log("defined");
             await Book.updateOne({_id: req.params.id}, {
                 name: req.body.name,
+                author: req.body.author,
                 image: "/uploads/" + req.file.filename,
                 description: req.body.description,
                 price: req.body.price,
