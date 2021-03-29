@@ -8,14 +8,12 @@
 <body>
     <div id="shoppingcart">
 <h1>Shopping cart</h1>
-
 <% if(!shoppingCart.length) { %>
     <p>Shopping cart empty</p>
     <p><a href="/">Shop here!</a></p>
 <% } else { %>
 
-    <% shoppingCart.forEach(book => { %>
-
+    <% shoppingCart.forEach((book) => { %>
     
 <div class="bookincart">
     <img src="<%=book.image%>">
