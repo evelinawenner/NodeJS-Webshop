@@ -8,9 +8,13 @@ const {
     adminEditBook,
     adminDeleteBook,
     showBook,
+
     showHomeAdmin,
     showHomeUser,
-    singleBookAdmin
+    singleBookAdmin,
+    showCart,
+    addToShoppingCart
+
  } = require("../controller/handleProduct");
  
  const {upload} = require("./../middleware/upload");
@@ -23,14 +27,22 @@ const router = express.Router();
 router.get("/admin", verifyAdmin, adminHomeRender) 
 // router.get("/addBook", verifyAdmin, addBookForm);
 router.post("/addBook", verifyAdmin, upload.single("imageurl"), addBookFormSubmit);
+
 router.get("/", showBooks);
 router.get("/", verifyUser, showBooks);
 router.get("/userHome", verifyUser, showHomeUser)
 router.get("/adminHome", verifyAdmin, showHomeAdmin)
+
 router.get("/showMyBooks", verifyAdmin, showAdminBooks)
 router.get("/admin/edit/:id",verifyAdmin, adminEditBookRender)
 router.post("/admin/edit/:id",verifyAdmin,upload.single("imageurl"), adminEditBook)
 router.get("/admin/delete/:id", verifyAdmin, adminDeleteBook)
+
 router.get("/showBook/:id", showBook);
 router.get("/book/:id", verifyAdmin, singleBookAdmin)
+
+router.get("/addToCart/:id", verifyUser, addToShoppingCart)
+router.get("/shoppingcart", verifyUser, showCart)
+
+
  module.exports = router;
