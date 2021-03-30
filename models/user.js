@@ -42,6 +42,11 @@ userSchema.methods.addToCart = function(bookId) {
    this.save();
 }
 
+userSchema.methods.addToWish = function(bookId) {
+  this.wishList.push(bookId)
+  this.save();
+}
+
 const User = mongoose.model("user", userSchema);
 
 module.exports = User;

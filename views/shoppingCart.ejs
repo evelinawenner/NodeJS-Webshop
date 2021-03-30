@@ -6,8 +6,21 @@
     <title>Shopping cart</title>
 </head>
 <body>
-    
+    <div id="shoppingcart">
 <h1>Shopping cart</h1>
+<% if(!shoppingCart.length) { %>
+    <p>Shopping cart empty</p>
+    <p><a href="/">Shop here!</a></p>
+<% } else { %>
 
+    <% shoppingCart.forEach((book) => { %>
+    
+<div class="bookincart">
+    <img src="<%=book.image%>">
+    <p><%=book.name%></p>
+</div>
+</div>
+<%})%>
+<%}%>
 </body>
 </html>

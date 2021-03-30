@@ -141,8 +141,9 @@ const singleBookAdmin = async(req,res) =>{
 
 const showCart = async (req, res)=>{
   try{
-    console.log('hejssaaan')
-  res.render("shoppingCart.ejs", { err: ""});
+    const user = await (await User.findOne({_id:req.user.user._id}).populate('shoppingCart'))
+
+  res.render("shoppingCart.ejs", { shoppingCart: user.shoppingCart, err: ""});
   }
  catch (error) {
   console.log(error);
@@ -151,18 +152,44 @@ const showCart = async (req, res)=>{
 
 const addToShoppingCart = async (req, res) => {
   try{
-    const bookId = req.params.id
-    const user = await User.findOne({_id:req.user.user._id})
-    user.addToCart(bookId);
-    const cartUser = await (await User.findOne({_id:req.user.user._id})).populate("ShoppingCart");
-    cartUser.addToCart(book._id);
-
-  res.redirect("/showbooks");
+    // const bookId = req.params.id
+    //const user = await User.findOne({_id:req.user.user._id})
+    const book = await Book.findOne({_id: req.params.id});
+   // user.addToCart(bookId);
+    const cartUser = await (await User.findOne({_id:req.user.user._id})).populate("shoppingCart");
+    cartUser.addToCart(book);
+  res.redirect("/");
   }
   catch (error) {
     console.log(error);
    }
 }
+
+
+const showWishList = async (req, res)=>{
+  try{
+    const user = await (await User.findOne({_id:req.user.user._id}).populate('wishList'))
+
+  res.render("wishlist.ejs", { wishList: user.wishList, err: ""});
+  }
+ catch (error) {
+  console.log(error);
+}
+}
+
+const addToWishList = async (req, res) => {
+  try{
+    const book = await Book.findOne({_id: req.params.id});
+    const wishListUser = await (await User.findOne({_id:req.user.user._id})).populate("wishList");
+    wishListUser.addToWish(book);
+  res.redirect("/");
+  }
+  catch (error) {
+    console.log(error);
+   }
+}
+
+
 
 module.exports = {
   adminHomeRender,
@@ -179,5 +206,7 @@ module.exports = {
   showHomeUser,
   singleBookAdmin,
   showCart,
-  addToShoppingCart
+  addToShoppingCart,
+  showWishList,
+  addToWishList
 };

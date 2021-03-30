@@ -13,8 +13,10 @@ const {
     showHomeUser,
     singleBookAdmin,
     showCart,
-    addToShoppingCart
 
+    addToShoppingCart,
+    showWishList,
+    addToWishList
  } = require("../controller/handleProduct");
  
  const {upload} = require("./../middleware/upload");
@@ -43,6 +45,10 @@ router.get("/book/:id", verifyAdmin, singleBookAdmin)
 
 router.get("/addToCart/:id", verifyUser, addToShoppingCart)
 router.get("/shoppingcart", verifyUser, showCart)
+
+router.get("/wishlist", verifyUser, showWishList)
+router.get("/addToWish/:id", verifyUser, addToWishList);
+
 
 
  module.exports = router;
