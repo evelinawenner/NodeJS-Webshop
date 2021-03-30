@@ -17,7 +17,7 @@
         <input type="number" name="" id="">
         <button>+</button>
         <h6><%= book.price %></h6>
-        <button>Lägg i wishlist</button>
+        <a href="/addToWish/<%=book.id%>"><button>Lägg i wishlist</button></a>
         <a href="/addToCart/<%=book.id%>"><button >Köp</button></a>
     </div>
     <div>

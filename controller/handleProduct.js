@@ -132,6 +132,28 @@ const addToShoppingCart = async (req, res) => {
    }
 }
 
+const showWishList = async (req, res)=>{
+  try{
+    const user = await (await User.findOne({_id:req.user.user._id}).populate('wishList'))
+
+  res.render("wishlist.ejs", { wishList: user.wishList, err: ""});
+  }
+ catch (error) {
+  console.log(error);
+}
+}
+
+const addToWishList = async (req, res) => {
+  try{
+    const book = await Book.findOne({_id: req.params.id});
+    const wishListUser = await (await User.findOne({_id:req.user.user._id})).populate("wishList");
+    wishListUser.addToWish(book);
+  res.redirect("/");
+  }
+  catch (error) {
+    console.log(error);
+   }
+}
 
 
 module.exports = {
@@ -145,5 +167,7 @@ module.exports = {
   adminDeleteBook,
   showBook,
   showCart,
-  addToShoppingCart
+  addToShoppingCart,
+  showWishList,
+  addToWishList
 };

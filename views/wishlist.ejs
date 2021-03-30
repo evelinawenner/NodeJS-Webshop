@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wish list</title>
+</head>
+<body>
+    <div id="wishlist">
+<h1>Wishlist</h1>
+<% if(!wishList.length) { %>
+    <p>Wishlist empty</p>
+    <p><a href="/">Browse here!</a></p>
+<% } else { %>
+
+    <% wishList.forEach((book) => { %>
+    
+<div class="bookinwishlist">
+    <img src="<%=book.image%>">
+    <p><%=book.name%></p>
+</div>
+</div>
+<%})%>
+<%}%>
+</body>
+</html>
