@@ -1,50 +1,67 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+@media only screen and (min-width: 1080px) {
+    #bookwrapper{
+        width: 100%;
     }
-    body {
-    background: #f4f1de;
+    #bookcontainer h5{
+        background-color: #e4e4e4;
+        width: 100%;
+        text-align: center;
+        margin: 3% 0 3% 0;
+        padding: 2% 0 2% 0;
     }
-    .bookFormContainer {
-        background: #b7b7a4;
-        position: absolute;
-        top:25%;
-        left: 25%;
-        padding: 20px;
-        width: 550px;
+   .editBookInfor{
+       width: 70%;
+       border: 0.8px solid gray;
+       margin: 0 auto 0 auto;
+   }
+   .editBookInfor > div{
+       width: 100%;
+       margin: 1% 0 1% 0;
+   }
+   
+    .addProdukt{
+        width: 70%;
         display: flex;
         flex-direction: row;
-        align-items: center;
-        justify-content: space-between;
-    }
-    form {
-        display: flex;
-        flex-direction:column;
-        justify-content: center;
-        
-    }
-    form input{
-        width: 92%;
-    border: none;
-    height: 20px;
-    margin: 10px;
-    }
-    form button{
-        color: black;
-    border: none;
-    cursor: pointer;
-    background: white;
-    height: 20px;
-    margin: 10px;
+        margin: 0 auto 0 auto;
+        justify-items: center;
     
+        border: 1px solid gray;
     }
-    h1{
-        font-family: neue-kabel,sans-serif;
-        font-weight: 800;
-        font-style: normal;
+    .addProdukt img{
+        height: 70px;
+        margin: 3% 0 0 3%;
     }
+    .addProdukt > div{
+        margin: 2%;
 
-    img {
-        width: 50%;
     }
+    .addProdukt a{
+        background-color: #e98326;
+        color: white;
+        width: 100px;
+        height: 30px;
+        padding: 5px;
+        text-align: center;
+        text-decoration: none;
+        margin: 2%;
+    }
+    footer{
+        background-color: #e4e4e4;
+        margin-top: 3%;
+    }
+    footer ul{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0 20px 0;
+    }
+    footer ul li{
+        float: left;
+        border-right:1px black solid ;
+        list-style: none;
+        text-align: center;
+        padding-right: 10px;
+        padding-left: 10px;
+    }
+}

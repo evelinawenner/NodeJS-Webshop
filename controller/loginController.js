@@ -1,4 +1,5 @@
 const User = require("../models/user");
+const Book = require("../models/product");
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
@@ -9,7 +10,7 @@ const loginRender = async (req, res) => {
 
 const loginCheck = async (req, res) => {
     //skickar email från input
-    const { email, password } = req.body;
+    const { email, password, role } = req.body;
     //sök efter användare i db
     const user = await User.findOne({ email: email });
 
@@ -31,7 +32,16 @@ const loginCheck = async (req, res) => {
             res.cookie("jwToken", jwToken, { maxAge: 3600000, httpOnly: true });
         }
         //returnerar användare till startsidan
-        return res.redirect("/");
+        
+        const userRole = await User.findOne({role:role})
+        const books = await Book.find();
+        if(userRole === "admin") {
+            return res.render("showBookAdmin.ejs",{user:user, err: " ", books:books})
+        }else{
+            return res.render("showBookUser.ejs", {err:" ", user:user, books:books})
+        }
+        
+        //return res.redirect("/");
     }
     //användare behöver logga in igen pga expired token
     return res.redirect("/login");

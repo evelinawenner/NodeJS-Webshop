@@ -1,12 +1,21 @@
 const Book = require("../models/product");
 require("dotenv").config();
 const User = require("../models/user");
-
+const showHomeAdmin = async(req,res) =>{
+  const user = await User.findOne({ _id: req.user.user._id });
+  res.render("showBookAdmin.ejs", {user:user, books})
+}
+const showHomeUser = async(req,res) =>{
+  const user = await User.findOne({ _id: req.user.user._id });
+  res.render("showBookUser.ejs", {user:user, books})
+}
 const adminHomeRender = async (req, res) => {
+  const user = await User.findOne({ _id: req.user.user._id });
   await Book.find().exec(function (err, books) {
     res.render("adminPage.ejs", {
       books,
-      id: ""
+      id: "",
+      user:user
     });
   });
 };
@@ -16,10 +25,10 @@ const adminHomeRender = async (req, res) => {
 // }
 
 const addBookFormSubmit = async (req, res) => {
-  const { name, description, price } = req.body;
-  // skapa course i database
+  const { name, author, description, price } = req.body;
   const book = await new Book({
     name: name,
+    author: author,
     image: "/uploads/" + req.file.filename,
     description: description,
     price: price,
@@ -39,14 +48,14 @@ const showAdminBooks = async (req, res) => {
     "bookList"
   );
   console.log(user.bookList);
-  res.render("adminPage.ejs", { books: user.bookList, id: "", err: ""});
+  res.render("adminPage.ejs", { books: user.bookList, id: "", err: "", user:user});
 };
 
 const adminEditBookRender = async (req, res) => {
     try {
         const id = req.params.id;
         const user = await User.findOne({_id: req.user.user._id}).populate("bookList");
-        res.render("adminPage.ejs", {id:id, books: user.bookList});
+        res.render("adminPage.ejs", {id:id, books: user.bookList, user:user});
     } catch (error) {
         console.log(error);
     }
@@ -58,6 +67,7 @@ const adminEditBook = async (req,res) => {
             console.log("undefined");
             await Book.updateOne({_id: req.params.id}, {
                 name: req.body.name,
+                author: req.body.author,
                 description: req.body.description,
                 price: req.body.price,
             });
@@ -65,6 +75,7 @@ const adminEditBook = async (req,res) => {
             console.log("defined");
             await Book.updateOne({_id: req.params.id}, {
                 name: req.body.name,
+                author: req.body.author,
                 image: "/uploads/" + req.file.filename,
                 description: req.body.description,
                 price: req.body.price,
@@ -92,18 +103,40 @@ const adminDeleteBook = async (req, res) => {
 }
 
 const showBooks = async (req, res) => {
-  const books = await Book.find();
-  res.render("showBooks.ejs", { err: " ", books: books });
+  const page = +req.query.page || 1;
+  try {
+    const totalProducts = await Book.find().countDocuments();
+    const productsPerReq = 4;
+    const pageGeneration = Math.ceil(totalProducts/productsPerReq);
+
+    const showProducts = productsPerReq * page;
+
+    const books = await Book.find().limit(showProducts);
+    res.render("showBooks.ejs", { err: " ", books,
+    totalProducts, productsPerReq, pageGeneration, showProducts });
+  } catch(error) {
+    console.log(error);
+  }
 };
 
 const showBook = async (req, res) => {
   try{
+    const user = await User.findOne({user: req.params.name});
     const book = await Book.findOne({_id: req.params.id});
-    res.render("singleBook.ejs", {err: " ", book: book});
+    res.render("singleBook.ejs", {err: " ",user:user, book: book});
   } catch (error) {
     console.log(error);
   }
-  
+}
+const singleBookAdmin = async(req,res) =>{
+  //const role = req.body
+  const role = await User.findOne(req.user.role)
+  const userRole = await User.findOne({role:role})
+  if(userRole === "admin"){
+    return res.render("singleBookAdmin.ejs",{user:user, err: " ", books:books})
+  } else{
+    return res.render("singleBookUser.ejs", {err:" ", user:user, books:books})
+  }
 }
 
 const showCart = async (req, res)=>{
@@ -114,7 +147,7 @@ const showCart = async (req, res)=>{
   }
  catch (error) {
   console.log(error);
-}
+  }
 }
 
 const addToShoppingCart = async (req, res) => {
@@ -131,6 +164,7 @@ const addToShoppingCart = async (req, res) => {
     console.log(error);
    }
 }
+
 
 const showWishList = async (req, res)=>{
   try{
@@ -156,6 +190,7 @@ const addToWishList = async (req, res) => {
 }
 
 
+
 module.exports = {
   adminHomeRender,
   // addBookForm,
@@ -166,6 +201,10 @@ module.exports = {
   adminEditBook,
   adminDeleteBook,
   showBook,
+
+  showHomeAdmin,
+  showHomeUser,
+  singleBookAdmin,
   showCart,
   addToShoppingCart,
   showWishList,
