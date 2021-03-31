@@ -8,13 +8,13 @@ const {
     adminEditBook,
     adminDeleteBook,
     showBook,
-
     showHomeAdmin,
     showHomeUser,
     singleBookAdmin,
     showCart,
-
     addToShoppingCart,
+    checkout,
+    shoppingSuccess,
     showWishList,
     addToWishList
  } = require("../controller/handleProduct");
@@ -46,9 +46,10 @@ router.get("/book/:id", verifyAdmin, singleBookAdmin)
 router.get("/addToCart/:id", verifyUser, addToShoppingCart)
 router.get("/shoppingcart", verifyUser, showCart)
 
+router.get("checkout", verifyUser, checkout)
+router.get("/shoppingSuccess", verifyUser, shoppingSuccess)
+
 router.get("/wishlist", verifyUser, showWishList)
 router.get("/addToWish/:id", verifyUser, addToWishList);
-
-
 
  module.exports = router;

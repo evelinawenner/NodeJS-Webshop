@@ -1,5 +1,6 @@
 const Book = require("../models/product");
 require("dotenv").config();
+const Stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const User = require("../models/user");
 const showHomeAdmin = async(req,res) =>{
   const user = await User.findOne({ _id: req.user.user._id });
@@ -128,7 +129,7 @@ const showBook = async (req, res) => {
     console.log(error);
   }
 }
-const singleBookAdmin = async(req,res) =>{
+const singleBookAdmin = async(req,res) => {
   //const role = req.body
   const role = await User.findOne(req.user.role)
   const userRole = await User.findOne({role:role})
@@ -139,8 +140,8 @@ const singleBookAdmin = async(req,res) =>{
   }
 }
 
-const showCart = async (req, res)=>{
-  try{
+const showCart = async (req, res) => {
+  try {
     const user = await (await User.findOne({_id:req.user.user._id}).populate('shoppingCart'))
 
   res.render("shoppingCart.ejs", { shoppingCart: user.shoppingCart, err: ""});
@@ -151,7 +152,7 @@ const showCart = async (req, res)=>{
 }
 
 const addToShoppingCart = async (req, res) => {
-  try{
+  try {
     // const bookId = req.params.id
     //const user = await User.findOne({_id:req.user.user._id})
     const book = await Book.findOne({_id: req.params.id});
@@ -162,23 +163,22 @@ const addToShoppingCart = async (req, res) => {
   }
   catch (error) {
     console.log(error);
-   }
+  }
 }
 
 
-const showWishList = async (req, res)=>{
-  try{
-    const user = await (await User.findOne({_id:req.user.user._id}).populate('wishList'))
-
-  res.render("wishlist.ejs", { wishList: user.wishList, err: ""});
+const showWishList = async (req, res) => {
+  try {
+    const user = await (await User.findOne({_id:req.user.user._id}).populate('wishList'));
+    res.render("wishlist.ejs", { wishList: user.wishList, err: ""});
   }
  catch (error) {
   console.log(error);
-}
+  }
 }
 
 const addToWishList = async (req, res) => {
-  try{
+  try {
     const book = await Book.findOne({_id: req.params.id});
     const wishListUser = await (await User.findOne({_id:req.user.user._id})).populate("wishList");
     wishListUser.addToWish(book);
@@ -186,10 +186,37 @@ const addToWishList = async (req, res) => {
   }
   catch (error) {
     console.log(error);
-   }
+  }
 }
 
 
+const checkout = async (req,res) => {
+  const user = await  User.findOne({_id:req.user.user._id}).populate("shoppingCart");
+  console.log(user.shoppingCart);
+  const session = await Stripe.checkout.sessions.create({
+      success_url: 'http://localhost:5001/shoppingSuccess',
+      cancel_url: 'https://localhost:5001/shoppingCart',
+      payment_method_types: ['card'],
+      line_items: user.shoppingCart.map(course =>{
+          return{
+              name:course.name,
+              amount : course.price,
+              quantity: 1,
+              currency:"sek"
+          }
+      }),
+      mode: 'payment',
+    });
+    console.log(session);
+    res.render("checkout.ejs", {cartItem:user.shoppingCart, sessionId: session.id});
+  //skica session Id till checkout ejs
+}
+const shoppingSuccess = async (req,res) => {
+  const user = await User.findOne({_id:req.user.user._id});
+  user.shoppingCart = [];
+  user.save();
+  res.send("din varukorg är tomt. vi skickar din beställning inom 3 dagar");
+}
 
 module.exports = {
   adminHomeRender,
@@ -201,12 +228,13 @@ module.exports = {
   adminEditBook,
   adminDeleteBook,
   showBook,
-
   showHomeAdmin,
   showHomeUser,
   singleBookAdmin,
   showCart,
   addToShoppingCart,
+  checkout,
+  shoppingSuccess,
   showWishList,
   addToWishList
 };
