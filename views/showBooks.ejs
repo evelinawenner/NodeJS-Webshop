@@ -86,8 +86,13 @@
                  <%  }) %>
             </div>
         </div>
-        
-        
+        <div>
+            <% if(pageGeneration !== showProducts/productsPerReq) { %>
+                <a href="/?page=<%=(showProducts/productsPerReq)+1%>">Ladda fler böcker</a>
+            <% } else { %>
+                <a href="/?page=1">Visa färre böcker</a>
+            <% } %>
+        </div>
     </div>
 
     <footer>
