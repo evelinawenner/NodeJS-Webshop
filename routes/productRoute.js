@@ -13,7 +13,9 @@ const {
     showHomeUser,
     singleBookAdmin,
     showCart,
-    addToShoppingCart
+    addToShoppingCart,
+    checkout,
+    shoppingSuccess
 
  } = require("../controller/handleProduct");
  
@@ -43,6 +45,7 @@ router.get("/book/:id", verifyAdmin, singleBookAdmin)
 
 router.get("/addToCart/:id", verifyUser, addToShoppingCart)
 router.get("/shoppingcart", verifyUser, showCart)
-
+router.get("checkout", verifyUser, checkout)
+router.get("/shoppingSuccess", verifyUser, shoppingSuccess)
 
  module.exports = router;

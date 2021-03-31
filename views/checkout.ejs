@@ -1,0 +1,18 @@
+
+    <% bookItem.forEach( book =>{ %>
+        <img src="<%= book.image %>" alt="<%= book.image %>"">
+        <p><%= book.name %></p>
+        <p><%= book.author %></p>
+        <h5><%= book.price %></h5>
+   <% }) %>
+    
+    <button type="submit">Checkout</button>
+
+<script src="https://js.stripe.com/v3/"></script>
+<script>
+    var stripe = Stripe ('pk_test_51IagcmFAWHNsjSWIMv56QBxrTo21mJbM822ApIupMB5Cdqij7tkH2GlJI22xBGwyNTCz9JSexkXshcubMFkJjBOR00V6XqfqbQ')
+    document.querySelector("button").addEventListener("click", ()=>{
+        stripe.redirectToCheckout({sessionId:"<%= sessionId %>"})
+    })
+</script>
+
