@@ -51,38 +51,35 @@
         background-color: #e98326;
         color: white;
     }
-    .main{
-        width: 100%;
-    }
-    .boken{
-        width: 60%;
+    #shoopingcart{
+        width: 850px;
         margin: 0 auto 0 auto;
-        display: grid;
+
     }
-    .imag{
-        width: 20%;
-        grid-area: 1/1/1/1;
-        margin: 5% 0 0 3%;
-    }
-    .information{
-        grid-area: 1/2/3/3;
-        display: flex;
-        flex-direction: column;
-        margin: 3% 0 3% 3%;
-    }
-    .information > div{
-        margin-top: 2%;
-    }
-    .annons{
-        grid-area: 3/1/4/4;
-        margin-bottom: 3%;
-    }
-    .buy{
-        width: 150px;
-        background-color: #e98326;
-        color: white;
+    #shoppingcart h1{
         text-align: center;
-        text-decoration: none;
+    }
+    .bookincart{
+        width: 700px;
+        height: 120px;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        margin: 1% auto 0 auto;
+        padding: 1%;
+        background-color: #e4e4e4;
+    }
+    .bookincart img{
+        width: 50px;
+        height: 80px;
+    }
+    button{
+        background-color: #e98326;
+        width: 150px;
+        height: 50px;
+        color: white;
+        margin:2% 0 2% 55%;
+
     }
     footer{
         background-color: #e4e4e4;

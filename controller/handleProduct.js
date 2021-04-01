@@ -142,9 +142,26 @@ const singleBookAdmin = async(req,res) => {
 
 const showCart = async (req, res) => {
   try {
-    const user = await (await User.findOne({_id:req.user.user._id}).populate('shoppingCart'))
+    const user = await  User.findOne({_id:req.user.user._id}).populate('shoppingCart')
+    
+  console.log(user.shoppingCart);
+  const session = await Stripe.checkout.sessions.create({
+      success_url: 'http://localhost:5001/shoppingSuccess',
+      cancel_url: 'https://localhost:5001/shoppingcart',
+      payment_method_types: ['card'],
+      line_items: user.shoppingCart.map(course =>{
+          return{
+              name:course.name,
+              amount : course.price,
+              quantity: 1,
+              currency:"sek"
+          }
+      }),
+      mode: 'payment',
+    });
+    console.log(session);
+    res.render("shoppingCart.ejs", {shoppingCart:user.shoppingCart, sessionId: session.id, err:" ", user:user});
 
-  res.render("shoppingCart.ejs", { shoppingCart: user.shoppingCart, err: ""});
   }
  catch (error) {
   console.log(error);
@@ -190,27 +207,7 @@ const addToWishList = async (req, res) => {
 }
 
 
-const checkout = async (req,res) => {
-  const user = await  User.findOne({_id:req.user.user._id}).populate("shoppingCart");
-  console.log(user.shoppingCart);
-  const session = await Stripe.checkout.sessions.create({
-      success_url: 'http://localhost:5001/shoppingSuccess',
-      cancel_url: 'https://localhost:5001/shoppingCart',
-      payment_method_types: ['card'],
-      line_items: user.shoppingCart.map(course =>{
-          return{
-              name:course.name,
-              amount : course.price,
-              quantity: 1,
-              currency:"sek"
-          }
-      }),
-      mode: 'payment',
-    });
-    console.log(session);
-    res.render("checkout.ejs", {cartItem:user.shoppingCart, sessionId: session.id});
-  //skica session Id till checkout ejs
-}
+
 const shoppingSuccess = async (req,res) => {
   const user = await User.findOne({_id:req.user.user._id});
   user.shoppingCart = [];
@@ -233,7 +230,6 @@ module.exports = {
   singleBookAdmin,
   showCart,
   addToShoppingCart,
-  checkout,
   shoppingSuccess,
   showWishList,
   addToWishList

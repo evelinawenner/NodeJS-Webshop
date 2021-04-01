@@ -13,7 +13,6 @@ const {
     singleBookAdmin,
     showCart,
     addToShoppingCart,
-    checkout,
     shoppingSuccess,
     showWishList,
     addToWishList
@@ -46,7 +45,6 @@ router.get("/book/:id", verifyAdmin, singleBookAdmin)
 router.get("/addToCart/:id", verifyUser, addToShoppingCart)
 router.get("/shoppingcart", verifyUser, showCart)
 
-router.get("checkout", verifyUser, checkout)
 router.get("/shoppingSuccess", verifyUser, shoppingSuccess)
 
 router.get("/wishlist", verifyUser, showWishList)

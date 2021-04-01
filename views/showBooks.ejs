@@ -86,11 +86,11 @@
                  <%  }) %>
             </div>
         </div>
-        <div>
+        <div class="showtill">
             <% if(pageGeneration !== showProducts/productsPerReq) { %>
-                <a href="/?page=<%=(showProducts/productsPerReq)+1%>">Ladda fler böcker</a>
+                <a href="/?page=<%=(showProducts/productsPerReq)+1%>" class="show">Ladda fler böcker</a>
             <% } else { %>
-                <a href="/?page=1">Visa färre böcker</a>
+                <a href="/?page=1" class="show">Visa färre böcker</a>
             <% } %>
         </div>
     </div>

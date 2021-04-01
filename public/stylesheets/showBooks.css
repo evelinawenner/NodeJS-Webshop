@@ -146,6 +146,16 @@
         width: 800px;
         
     }
+    .show{
+        text-decoration: none;
+        text-align: center;
+        color: #000;
+    }
+    .showtill{
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
     .bookInfor img{
         width: 100px;
         margin: 3%;
